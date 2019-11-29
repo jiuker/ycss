@@ -25,3 +25,25 @@ Only one configuration is needed, you can automatically complete your own style 
              "height"
          ]
      }
+# Reg
+## Common
+Common is an intermediary mechanism, which can be understood as a container
+means:
+  w-15-h-20{w-15 h-20 pl-10}
+* key is the regexp
+* value $1,$2 mean regexp match value,w-($1)-h-($2)
+## Single
+Single is the most basic style expression
+means:
+   h-20{height:20px}
+### Vue
+* key is the regexp
+* value $1,$2 mean regexp match value,w-($1)-h-($2)
+### RN
+Why do like -1,-2?
+-1,-2 is a special value and can keep the original data type
+* key is the regexp
+* value -1,-2 mean regexp match value,w-(-1)-h-(-2),-1,-2,-3,-4,-5,-6 also can work
+
+# QQ
+* 941057162
