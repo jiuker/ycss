@@ -44,7 +44,8 @@ Why do like -1,-2?
 -1,-2 is a special value and can keep the original data type
 * key is the regexp
 * value -1,-2 mean regexp match value,w-(-1)-h-(-2),-1,-2,-3,-4,-5,-6 also can work
-
+# example
+* /res/sample
 # QQ
 * 941057162
 
