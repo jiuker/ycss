@@ -1,0 +1,13 @@
+number<0 mean it will replace
+<css key="w-(\d{1,5})">
+    "width":-1
+</css>
+<css key="pl-(\d{1,5})">
+    "paddingLeft":-1
+</css>
+<css key="h-(\d{1,5})">
+    "height":-1
+</css>
+<css key="tX-(\d{1,5})">
+     "transform": [{"translateX":-1},{"translateY":-1}]
+</css>

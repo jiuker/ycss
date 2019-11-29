@@ -1,0 +1,15 @@
+<css key="w-(\d{1,2})">
+    width:$1 px;
+</css>
+<css key="pl-(\d{1,2})">
+    padding-left:$1px;
+</css>
+<css key="h-(\d{1,2})">
+    height:$1 px;
+</css>
+<css key="h(\d{1,2})">
+    height:$1%;
+</css>
+<css key="wbox">
+    display:box;
+</css>

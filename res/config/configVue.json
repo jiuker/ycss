@@ -1,0 +1,15 @@
+{
+  "debug": false,
+  "type": "vue",
+  "common": ["./res/regexp/common/vue.reg"],
+  "single": ["./res/regexp/single/vue.reg"],
+  "outUnit": "upx",
+  "zoom": 2,
+  "needZoomUnit": "px|rem|upx",
+  "reg": ["class=\"([^\"]+)\""],
+  "watchDir": ["./res/sample/vue"],
+  "oldCssIndex": 0,
+  "oldCssReg": "<style>([^<]+)</style>",
+  "oldCssCommonSpilt": "/* Automatic generation */",
+  "keyNeedZoom": []
+}

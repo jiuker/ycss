@@ -1,0 +1,14 @@
+<css key="w-(\d{1,2})-h-(\d{1,2})">
+    w-$1
+    h-$2
+    pl-$1
+</css>
+<css key="w-(\d{1,2})">
+    w-$1
+</css>
+<css key="h-(\d{1,2})">
+    h-$1
+</css>
+<css key="h(\d{1,2})">
+    h$1
+</css>

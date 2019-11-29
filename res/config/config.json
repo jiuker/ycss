@@ -1,0 +1,18 @@
+{
+    "debug": true,
+    "type": "rn",
+    "common": ["./res/regexp/common/rn.reg"],
+    "single": ["./res/regexp/single/rn.reg"],
+    "outUnit": "upx",
+    "zoom": 1.4,
+    "needZoomUnit": "",
+    "reg": ["GetStyle\\(\"([^\"]+)\""],
+    "watchDir": ["./res/sample/rn"],
+    "oldCssIndex": 0,
+    "oldCssReg": "/\\* Automatic generation Start \\*/([^/]+)/\\*",
+    "oldCssCommonSpilt": "/* Automatic generation */",
+    "keyNeedZoom": [
+        "width",
+        "height"
+    ]
+}
