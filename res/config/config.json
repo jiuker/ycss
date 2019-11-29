@@ -1,16 +1,13 @@
 {
     "debug": true,
-    "type": "rn",
-    "common": ["./res/regexp/common/rn.reg"],
-    "single": ["./res/regexp/single/rn.reg"],
-    "outUnit": "upx",
-    "zoom": 1.4,
-    "needZoomUnit": "",
-    "reg": ["GetStyle\\(\"([^\"]+)\""],
-    "watchDir": ["./res/sample/rn"],
+    "type": "vue",
+    "common": ["./res/regexp/common/vue.reg"],
+    "single": ["./res/regexp/single/vue.reg"],
+    "outUnit": "px",
+    "zoom": 2,
+    "needZoomUnit": "px|rem|upx",
+    "reg": ["class=\"([^\"]+)\""],
+    "watchDir": ["./res/sample/vue"],
     "oldCssReg": "/\\* Automatic generation Start \\*/([^/]+)/\\*",
-    "keyNeedZoom": [
-        "width",
-        "height"
-    ]
+    "keyNeedZoom": []
 }

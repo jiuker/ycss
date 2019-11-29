@@ -41,7 +41,11 @@ func (v *vueReplace) Save(newPos, oldPos *string) error {
 	if viper.GetBool("debug") {
 		fmt.Println("will insert ", newWrite)
 	}
-	_, err := v.file.WriteString(newWrite)
+	err := v.file.Truncate(0)
+	if err != nil {
+		return err
+	}
+	_, err = v.file.WriteAt([]byte(newWrite), 0)
 	if err != nil {
 		return err
 	}
@@ -100,9 +104,10 @@ func (v *vueReplace) GetRegexpCss(cls []string, common *sync.Map, single css.Css
 						val = strings.ReplaceAll(val, fmt.Sprintf("$%v", i), matchVal[0][i])
 					}
 					if !strings.Contains(val, "$") {
-						single.GetAllData().Range(func(key1, value1 interface{}) bool {
-							matchVal1 := key1.(*regexp.Regexp).FindAllStringSubmatch(val, -1)
-							val1 := value1.(css.Uint).Val().(string)
+						for _, _unit := range single.GetAllData().Range(0) {
+							unit := _unit.(css.Uint)
+							matchVal1 := unit.Reg().FindAllStringSubmatch(val, -1)
+							val1 := unit.Val().(string)
 							if len(matchVal1) == 1 {
 								for i := 1; i < len(matchVal1[0]); i++ {
 									// replace data
@@ -111,10 +116,9 @@ func (v *vueReplace) GetRegexpCss(cls []string, common *sync.Map, single css.Css
 								if !strings.Contains(val1, "$") {
 									cssVal += val1
 								}
-								return false
+								break
 							}
-							return true
-						})
+						}
 					}
 				}
 				if cssVal != "" {

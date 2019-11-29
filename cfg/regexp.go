@@ -58,6 +58,7 @@ func (r *cssRegexp) Parse() error {
 	c := GetBaseConfig()
 	commonPath := c.GetCommonRegexpPath()
 	singlePath := c.GetSinglePath()
+	r.common = &sync.Map{}
 	for _, path := range commonPath {
 		file, err := os.OpenFile(path, os.O_RDONLY, 0x666)
 		if err != nil {
@@ -119,10 +120,10 @@ func (r *cssRegexp) Parse() error {
 				switch c.GetFileType() {
 				case RNCSS:
 					// rn
-					r.single.Set(regexp.MustCompile(val), css.NewRnCssUint(selection.Text()))
+					r.single.Set(css.NewRnCssUint(regexp.MustCompile(val), selection.Text()))
 				case VueCss:
 					// vue
-					r.single.Set(regexp.MustCompile(val), css.NewVueCssUint(selection.Text()))
+					r.single.Set(css.NewVueCssUint(regexp.MustCompile(val), selection.Text()))
 				}
 			}
 		})
@@ -130,10 +131,10 @@ func (r *cssRegexp) Parse() error {
 	if c.Debug() {
 		// Debug
 		fmt.Println("single regexp --------------------------------")
-		r.single.GetAllData().Range(func(key, value interface{}) bool {
-			fmt.Println(key, value.(css.Uint).Val())
-			return true
-		})
+		for _, v := range r.single.GetAllData().Range(0) {
+			data := v.(css.Uint)
+			fmt.Println(data.Reg().String(), data.Val())
+		}
 	}
 	return nil
 }

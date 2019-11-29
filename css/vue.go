@@ -3,50 +3,43 @@ package css
 import (
 	"regexp"
 	"strings"
-	"sync"
+
+	"github.com/gogf/gf/container/garray"
 )
 
 type VueCss struct {
-	// map[string]Unit
-	data *sync.Map
+	// []Unit
+	data *garray.Array
 }
 
-func (r *VueCss) Set(classNameReg *regexp.Regexp, uint Uint) {
-	r.data.Store(classNameReg, uint)
+func (r *VueCss) Set(unit Uint) {
+	r.data.Append(unit)
 }
 
-func (r *VueCss) Get(className string) Uint {
-	data, ok := r.data.Load(className)
-	if !ok {
-		return nil
-	}
-	return data.(Uint)
-}
-
-func (r *VueCss) MergeSelf(target Css) {
-	target.GetAllData().Range(func(key, value interface{}) bool {
-		r.data.Store(key, value)
-		return true
-	})
-}
-func (r *VueCss) GetAllData() *sync.Map {
+func (r *VueCss) GetAllData() *garray.Array {
 	return r.data
 }
 
 func NewVueCss() Css {
 	return &VueCss{
-		data: &sync.Map{},
+		data: garray.NewArray(),
 	}
 }
-func NewVueCssUint(cssVal string) Uint {
+func NewVueCssUint(reg *regexp.Regexp, cssVal string) Uint {
 	cssVal = strings.TrimSpace(cssVal)
 	return &VueCssUint{
 		val: cssVal,
+		reg: reg,
 	}
 }
 
 type VueCssUint struct {
 	val string
+	reg *regexp.Regexp
+}
+
+func (v *VueCssUint) Reg() *regexp.Regexp {
+	return v.reg
 }
 
 func (v *VueCssUint) Val() interface{} {

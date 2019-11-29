@@ -2,49 +2,42 @@ package css
 
 import (
 	"regexp"
-	"sync"
+
+	"github.com/gogf/gf/container/garray"
 )
 
 type RnCss struct {
-	// map[string]Unit
-	data *sync.Map
+	// []unit
+	data *garray.Array
 }
 
-func (r *RnCss) Set(classNameReg *regexp.Regexp, uint Uint) {
-	r.data.Store(classNameReg, uint)
+func (r *RnCss) Set(unit Uint) {
+	r.data.Append(unit)
 }
 
-func (r *RnCss) Get(className string) Uint {
-	data, ok := r.data.Load(className)
-	if !ok {
-		return nil
-	}
-	return data.(Uint)
-}
-
-func (r *RnCss) MergeSelf(target Css) {
-	target.GetAllData().Range(func(key, value interface{}) bool {
-		r.data.Store(key, value)
-		return true
-	})
-}
-func (r *RnCss) GetAllData() *sync.Map {
+func (r *RnCss) GetAllData() *garray.Array {
 	return r.data
 }
 
 func NewRnCss() Css {
 	return &RnCss{
-		data: &sync.Map{},
+		data: garray.NewArray(),
 	}
 }
-func NewRnCssUint(cssVal string) Uint {
+func NewRnCssUint(reg *regexp.Regexp, cssVal string) Uint {
 	return &RnCssUint{
 		val: cssVal,
+		reg: reg,
 	}
 }
 
 type RnCssUint struct {
 	val interface{}
+	reg *regexp.Regexp
+}
+
+func (v *RnCssUint) Reg() *regexp.Regexp {
+	return v.reg
 }
 
 func (v *RnCssUint) Val() interface{} {

@@ -21,7 +21,7 @@ export default class App extends React.Component {
     render() {
         // 注意render一个组件
         return (
-            <div style={GetStyle("w-110 h-25 tX-11")}></div>
+            <div style={GetStyle("w-110 h-25 tX-12")}></div>
     )
     }
 }
@@ -71,7 +71,7 @@ export default class App extends React.Component {
     render() {
         // 注意render一个组件
         return (
-            <div style={GetStyle("w-110 h-25 tX-11")}></div>
+            <div style={GetStyle("w-110 h-25 tX-12")}></div>
     )
     }
 }
@@ -85,19 +85,19 @@ const styles = StyleSheet.create({
 	"h-25": {
 		"height": 35
 	},
-	"tX-11": {
+	"tX-12": {
 		"transform": [
 			{
-				"translateX": 11
+				"translateX": 12
 			},
 			{
-				"translateY": 11
+				"translateY": 12
 			}
 		],
-		"width": 15.399999999999999
+		"width": 16.799999999999997
 	},
 	"w-110": {
-		"width": 15.399999999999999
+		"width": 154
 	}
 ,
 /* Automatic generation End */
