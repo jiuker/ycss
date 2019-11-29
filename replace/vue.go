@@ -52,26 +52,15 @@ func (v *vueReplace) Save(newPos, oldPos *string) error {
 	return nil
 }
 
-func (v *vueReplace) GetOldCss(reg *regexp.Regexp, index int, haveSplit bool, split string) (*string, *string, error) {
+func (v *vueReplace) GetOldCss(reg *regexp.Regexp) (*string, *string, error) {
 	mCssStr := reg.FindAllStringSubmatch(v.GetFileBody(), -1)
 	if len(mCssStr) == 0 {
 		return nil, nil, errors.New("no match old css")
 	}
-	if len(mCssStr) < index {
-		return nil, nil, errors.New("index out of match")
+	if len(mCssStr[0]) != 2 {
+		return nil, nil, errors.New("no match old css")
 	}
-	mCssArray := mCssStr[index]
-	if len(mCssArray) != 2 {
-		return nil, nil, errors.New("old css find reg not correct")
-	}
-	if haveSplit {
-		cssSplitArr := strings.SplitN(mCssArray[1], split, 2)
-		if len(cssSplitArr) <= 2 {
-			return &cssSplitArr[len(cssSplitArr)-1], &mCssArray[0], nil
-		}
-		return nil, nil, errors.New("find css is not correct")
-	}
-	return &mCssArray[1], &mCssArray[0], nil
+	return &mCssStr[0][1], &mCssStr[0][0], nil
 }
 
 func (v *vueReplace) Zoom(in *string, unit string, needZoomUnit string, needZoomKey []string, zoom float64) *string {
@@ -169,7 +158,7 @@ func NewVueReplace(path string) (Replace, error) {
 		for {
 			select {
 			case <-ctx.Done():
-				fmt.Println("file close!")
+				fmt.Println("file close:", path)
 				file.Close()
 				return
 			}

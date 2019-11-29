@@ -14,7 +14,7 @@ type Replace interface {
 	GetRegexpCss([]string, *sync.Map, css.Css) *string
 	// needZoomKey for rn
 	Zoom(css *string, unit string, needZoomUint string, needZoomKey []string, zoom float64) *string
-	GetOldCss(*regexp.Regexp, int, bool, string) (*string, *string, error)
+	GetOldCss(*regexp.Regexp) (*string, *string, error)
 	Replace(old *string, new *string, pos *string) *string
 	Save(newPos *string, old *string) error
 	// close file

@@ -26,47 +26,32 @@ type Config interface {
 	GetNeedZoomUnit() string
 	GetReg() []*regexp.Regexp
 	GetOldCssReg() *regexp.Regexp
-	GetOldCssIndex() int
-	GetOldCssCommonSplit() (string, bool)
 	GetWatchDir() []string
 	GetKeyNeedZoom() []string
 }
 type cfg struct {
 	// should like "px","rem"
-	OutUnit           string
-	CommonPath        []string
-	SinglePath        []string
-	CssType           FileType
-	rwLocker          sync.RWMutex
-	notifyCount       int64
-	Zoom              float64
-	NeedZoomUnit      string
-	Reg               []*regexp.Regexp
-	WatchDir          []string
-	IsDebug           bool
-	OldCssReg         *regexp.Regexp
-	OldCssIndex       int
-	OldCssCommonSplit string
-	KeyNeedZoom       []string
+	OutUnit      string
+	CommonPath   []string
+	SinglePath   []string
+	CssType      FileType
+	rwLocker     sync.RWMutex
+	notifyCount  int64
+	Zoom         float64
+	NeedZoomUnit string
+	Reg          []*regexp.Regexp
+	WatchDir     []string
+	IsDebug      bool
+	OldCssReg    *regexp.Regexp
+	KeyNeedZoom  []string
 }
 
 func (c *cfg) GetKeyNeedZoom() []string {
 	return c.KeyNeedZoom
 }
 
-func (c *cfg) GetOldCssCommonSplit() (string, bool) {
-	if c.OldCssCommonSplit != "" {
-		return c.OldCssCommonSplit, true
-	}
-	return "", false
-}
-
 func (c *cfg) GetOldCssReg() *regexp.Regexp {
 	return c.OldCssReg
-}
-
-func (c *cfg) GetOldCssIndex() int {
-	return c.OldCssIndex
 }
 
 func (c *cfg) GetNeedZoomUnit() string {
@@ -155,9 +140,7 @@ func refreshCfg() {
 	_cfg.NeedZoomUnit = viper.GetString("needZoomUnit")
 	_cfg.WatchDir = viper.GetStringSlice("watchDir")
 	_cfg.IsDebug = viper.GetBool("debug")
-	_cfg.OldCssIndex = viper.GetInt("oldCssIndex")
 	_cfg.OldCssReg = regexp.MustCompile(fmt.Sprintf(`%s`, viper.GetString("oldCssReg")))
-	_cfg.OldCssCommonSplit = viper.GetString("oldCssCommonSpilt")
 	_cfg.KeyNeedZoom = viper.GetStringSlice("keyNeedZoom")
 	// clear it regexp
 	_cfg.Reg = []*regexp.Regexp{}

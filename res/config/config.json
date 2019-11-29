@@ -8,9 +8,7 @@
     "needZoomUnit": "",
     "reg": ["GetStyle\\(\"([^\"]+)\""],
     "watchDir": ["./res/sample/rn"],
-    "oldCssIndex": 0,
     "oldCssReg": "/\\* Automatic generation Start \\*/([^/]+)/\\*",
-    "oldCssCommonSpilt": "/* Automatic generation */",
     "keyNeedZoom": [
         "width",
         "height"

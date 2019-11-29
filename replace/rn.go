@@ -136,13 +136,13 @@ func walkToSet(data interface{}, key string, keyNeedZoom []string, zoom float64)
 	}
 	return data
 }
-func (v *rnReplace) GetOldCss(reg *regexp.Regexp, index int, haveSplit bool, split string) (*string, *string, error) {
+func (v *rnReplace) GetOldCss(reg *regexp.Regexp) (*string, *string, error) {
 	mCssStr := reg.FindAllStringSubmatch(v.GetFileBody(), -1)
 	if len(mCssStr) == 0 {
-		return nil, nil, errors.New("no match old css 140")
+		return nil, nil, errors.New("no match old css")
 	}
 	if len(mCssStr[0]) != 2 {
-		return nil, nil, errors.New("no match old css 143")
+		return nil, nil, errors.New("no match old css")
 	}
 	return &mCssStr[0][1], &mCssStr[0][0], nil
 }

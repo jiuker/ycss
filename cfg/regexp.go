@@ -93,6 +93,14 @@ func (r *cssRegexp) Parse() error {
 		})
 	}
 	// single is different than vue
+	switch c.GetFileType() {
+	case RNCSS:
+		// rn
+		r.single = css.NewRnCss()
+	case VueCss:
+		// vue
+		r.single = css.NewVueCss()
+	}
 	for _, path := range singlePath {
 		file, err := os.OpenFile(path, os.O_RDONLY, 0x666)
 		if err != nil {
@@ -111,15 +119,9 @@ func (r *cssRegexp) Parse() error {
 				switch c.GetFileType() {
 				case RNCSS:
 					// rn
-					if r.single == nil {
-						r.single = css.NewRnCss()
-					}
 					r.single.Set(regexp.MustCompile(val), css.NewRnCssUint(selection.Text()))
 				case VueCss:
 					// vue
-					if r.single == nil {
-						r.single = css.NewVueCss()
-					}
 					r.single.Set(regexp.MustCompile(val), css.NewVueCssUint(selection.Text()))
 				}
 			}

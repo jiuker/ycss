@@ -8,8 +8,6 @@
   "needZoomUnit": "px|rem|upx",
   "reg": ["class=\"([^\"]+)\""],
   "watchDir": ["./res/sample/vue"],
-  "oldCssIndex": 0,
-  "oldCssReg": "<style>([^<]+)</style>",
-  "oldCssCommonSpilt": "/* Automatic generation */",
+  "oldCssReg": "/\\* Automatic generation Start \\*/([^/]+)/\\*",
   "keyNeedZoom": []
 }
