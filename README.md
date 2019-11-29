@@ -47,3 +47,7 @@ Why do like -1,-2?
 
 # QQ
 * 941057162
+
+# TODO
+* Support Global Value To Set
+* Support Load Or Write Target file or dir
