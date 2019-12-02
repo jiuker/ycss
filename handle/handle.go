@@ -24,7 +24,7 @@ func StartHandle() {
 					f := filePath.NewFilePath(path)
 					switch cfg.GetBaseConfig().GetFileType() {
 					case cfg.VueCss:
-						if f.GetFileType() != ".vue" && f.GetFileType() != ".nvue" {
+						if f.GetFileType() != ".vue" && f.GetFileType() != ".nvue" && f.GetFileType() != ".html" && f.GetFileType() != ".htm" {
 							return
 						}
 						pla, err = replace.NewVueReplace(f)
