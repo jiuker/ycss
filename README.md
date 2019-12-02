@@ -132,5 +132,5 @@ The default rule is demo, and you can write your own structure.
     .f-11{flex:11;}
     /* Automatic generation End */
     </style>
-# QQ
+# QQGroup
 * 941057162
