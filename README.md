@@ -130,5 +130,3 @@ The default rule is demo, and you can write your own structure.
     </style>
 # QQ
 * 941057162
-# TODO
-* Support Load Or Write Target file or dir
