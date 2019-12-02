@@ -236,7 +236,7 @@ func NewRnReplace(fP filePath.FilePath) (Replace, error) {
 		}()
 
 		return &rnReplace{
-			path:         path,
+			path:         fP.GetFilePath(),
 			file:         file,
 			outFile:      outFile,
 			cancelFun:    cancelFun,
@@ -268,7 +268,7 @@ func NewRnReplace(fP filePath.FilePath) (Replace, error) {
 			}
 		}()
 		return &rnReplace{
-			path:         path,
+			path:         fP.GetFilePath(),
 			file:         file,
 			outFile:      outFile,
 			cancelFun:    cancelFun,

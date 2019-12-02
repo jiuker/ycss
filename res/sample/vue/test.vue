@@ -8,8 +8,8 @@
     <div class="maxh-23 maxw-10 minh-10 minw-22"></div>
     <div class="p-f p-a p-r d-b t-2 b-1 l-3 r-40 va-m zi-205"></div>
     <div class="mt-10 ml-10 mr-10 mb-10"></div>
-    <div class="pt-10 pl-10 pr-10 pb-10 br-1"></div>
-    <div class="d-f fd-r ai-c jc-c ai-c fw-nw f-21 test1"></div>
+    <div class="pt-10 pl-10 pr-10 pb-10 br-4"></div>
+    <div class="d-f fd-r ai-c jc-c ai-c fw-nw f-10 test1"></div>
 </template>
 <style>
     .test{
@@ -68,6 +68,6 @@
 .ai-c{align-items:center;}
 .jc-c{justify-content:center;}
 .fw-nw{flex-wrap:nowrap;}
-.f-21{flex:21;}
+.f-11{flex:11;}
 /* Automatic generation End */
 </style>

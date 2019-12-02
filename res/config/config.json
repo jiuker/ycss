@@ -1,22 +1,19 @@
 {
-    "debug": true,
-    "type": "rn",
-    "common": ["./res/regexp/common/rn.reg"],
-    "single": ["./res/regexp/single/rn.reg"],
+    "debug": false,
+    "type": "vue",
+    "common": ["./res/regexp/common/vue.reg"],
+    "single": ["./res/regexp/single/vue.reg"],
     "outUnit": "upx",
-    "zoom": 1.4,
-    "needZoomUnit": "",
-    "reg": ["GetStyle\\(\"([^\"]+)\""],
-    "watchDir": ["./res/sample/rn"],
+    "zoom": 2,
+    "needZoomUnit": "px|rem|upx",
+    "reg": ["class=\"([^\"]+)\""],
+    "watchDir": ["./res/sample/vue"],
     "oldCssReg": "/\\* Automatic generation Start \\*/([^/]+)/\\*",
-    "keyNeedZoom": [
-        "width",
-        "height"
-    ],
+    "keyNeedZoom": [],
     "static": {
         "red": "#ff0000",
         "red-1": "#ff1100",
         "height": 12
     },
-    "outPath": "@FILEDIR/@FILENAME.css"
+    "outPath": "@FILEDIR/test.css"
 }

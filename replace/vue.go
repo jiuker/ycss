@@ -180,6 +180,7 @@ func (v *vueReplace) FindClass(reg []*regexp.Regexp) []string {
 
 // new replace
 func NewVueReplace(fP filePath.FilePath) (Replace, error) {
+	fmt.Println("--------", fP.GetFilePath())
 	path, same := fP.Format(cfg.GetBaseConfig().GetOutPath())
 	if same {
 		file, err := os.OpenFile(path, os.O_RDWR, 0x666)
@@ -203,7 +204,7 @@ func NewVueReplace(fP filePath.FilePath) (Replace, error) {
 			}
 		}()
 		return &vueReplace{
-			path:         path,
+			path:         fP.GetFilePath(),
 			file:         file,
 			outFile:      outFile,
 			cancelFun:    cancelFun,
@@ -235,7 +236,7 @@ func NewVueReplace(fP filePath.FilePath) (Replace, error) {
 			}
 		}()
 		return &vueReplace{
-			path:         path,
+			path:         fP.GetFilePath(),
 			file:         file,
 			outFile:      outFile,
 			cancelFun:    cancelFun,
