@@ -10,6 +10,7 @@ import (
 
 type Replace interface {
 	GetFileBody() string
+	GetOutFileBody() string
 	FindClass([]*regexp.Regexp) []string
 	GetRegexpCss([]string, *sync.Map, css.Css) *string
 	// needZoomKey for rn

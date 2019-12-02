@@ -2,7 +2,7 @@ package handle
 
 import (
 	"fmt"
-
+	"github.com/jiuker/ycss/filePath"
 	"github.com/jiuker/ycss/replace"
 
 	"github.com/spf13/viper"
@@ -21,16 +21,23 @@ func StartHandle() {
 				var pla replace.Replace
 				var err error
 				func() {
+					f := filePath.NewFilePath(path)
 					switch cfg.GetBaseConfig().GetFileType() {
 					case cfg.VueCss:
-						pla, err = replace.NewVueReplace(path)
+						if f.GetFileType() != ".vue" && f.GetFileType() != ".nvue" {
+							return
+						}
+						pla, err = replace.NewVueReplace(f)
 						if err != nil {
 							fmt.Println(err.Error())
 							return
 						}
 						defer pla.Done()
 					case cfg.RNCSS:
-						pla, err = replace.NewRnReplace(path)
+						if f.GetFileType() != ".js" && f.GetFileType() != ".jsx" {
+							return
+						}
+						pla, err = replace.NewRnReplace(f)
 						if err != nil {
 							fmt.Println(err.Error())
 							return

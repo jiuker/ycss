@@ -17,5 +17,6 @@
         "red": "#ff0000",
         "red-1": "#ff1100",
         "height": 12
-    }
+    },
+    "outPath": "@FILEDIR/@FILENAME.css"
 }

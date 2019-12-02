@@ -29,6 +29,7 @@ type Config interface {
 	GetWatchDir() []string
 	GetKeyNeedZoom() []string
 	GetStatic() *sync.Map
+	GetOutPath() string
 }
 type cfg struct {
 	// should like "px","rem"
@@ -46,6 +47,11 @@ type cfg struct {
 	OldCssReg    *regexp.Regexp
 	KeyNeedZoom  []string
 	StaticMap    *sync.Map
+	OutPath      string
+}
+
+func (c *cfg) GetOutPath() string {
+	return c.OutPath
 }
 
 func (c *cfg) GetStatic() *sync.Map {
@@ -176,6 +182,7 @@ func refreshCfg() {
 	for k, v := range viper.GetStringMap("static") {
 		_cfg.StaticMap.Store(k, v)
 	}
+	_cfg.OutPath = viper.GetString("outPath")
 	// clear it regexp
 	_cfg.Reg = []*regexp.Regexp{}
 	for _, v := range viper.GetStringSlice("reg") {

@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/jiuker/ycss/cfg"
+	"github.com/jiuker/ycss/filePath"
 	"io/ioutil"
 	"os"
 	"regexp"
@@ -20,11 +22,14 @@ import (
 )
 
 type rnReplace struct {
-	path      string
-	bodyStr   string
-	file      *os.File
-	ctx       context.Context
-	cancelFun context.CancelFunc
+	inAndOutSame bool
+	path         string
+	bodyStr      string
+	file         *os.File
+	outFile      *os.File
+	outbodyStr   string
+	ctx          context.Context
+	cancelFun    context.CancelFunc
 }
 
 func (v *rnReplace) GetFileBody() string {
@@ -37,7 +42,18 @@ func (v *rnReplace) GetFileBody() string {
 	}
 	return v.bodyStr
 }
-
+func (v *rnReplace) GetOutFileBody() string {
+	if v.outbodyStr == "" {
+		outbodyStr, err := ioutil.ReadAll(v.outFile)
+		if err != nil {
+			fmt.Println(err.Error())
+			return ""
+		}
+		fmt.Println("read file is", string(outbodyStr))
+		v.outbodyStr = string(outbodyStr)
+	}
+	return v.outbodyStr
+}
 func (v *rnReplace) FindClass(reg []*regexp.Regexp) []string {
 	return findAllCss(v.GetFileBody(), reg)
 }
@@ -143,7 +159,13 @@ func walkToSet(data interface{}, key string, keyNeedZoom []string, zoom float64)
 	return data
 }
 func (v *rnReplace) GetOldCss(reg *regexp.Regexp) (*string, *string, error) {
-	mCssStr := reg.FindAllStringSubmatch(v.GetFileBody(), -1)
+	if viper.GetBool("debug") {
+		fmt.Println("outFileBody--------------", v.GetOutFileBody())
+	}
+	if !v.inAndOutSame {
+		reg = regexp.MustCompile(strings.ReplaceAll(reg.String(), "Start", fmt.Sprintf(`Start\(%s\)`, v.path)))
+	}
+	mCssStr := reg.FindAllStringSubmatch(v.GetOutFileBody(), -1)
 	if len(mCssStr) == 0 {
 		return nil, nil, errors.New("no match old css")
 	}
@@ -163,20 +185,20 @@ func (v *rnReplace) Replace(old *string, new *string, pos *string) *string {
 
 func (v *rnReplace) Save(newPos *string, oldPos *string) error {
 	watch.NeedIgnore(v.path)
-	bodyCopy := v.GetFileBody()
+	bodyCopy := v.GetOutFileBody()
 	newWrite := strings.Replace(bodyCopy, *oldPos, *newPos, 2)
 	if viper.GetBool("debug") {
 		fmt.Println("will insert ", newWrite)
 	}
-	err := v.file.Truncate(0)
+	err := v.outFile.Truncate(0)
 	if err != nil {
 		return err
 	}
-	_, err = v.file.WriteAt([]byte(newWrite), 0)
+	_, err = v.outFile.WriteAt([]byte(newWrite), 0)
 	if err != nil {
 		return err
 	}
-	err = v.file.Sync()
+	err = v.outFile.Sync()
 	if err != nil {
 		return err
 	}
@@ -188,26 +210,70 @@ func (v *rnReplace) Done() {
 }
 
 // new replace
-func NewRnReplace(path string) (Replace, error) {
-	file, err := os.OpenFile(path, os.O_RDWR|os.O_SYNC, 0x666)
-	if err != nil {
-		return nil, err
-	}
-	ctx, cancelFun := context.WithTimeout(context.Background(), time.Duration(time.Second*5))
-	go func() {
-		for {
-			select {
-			case <-ctx.Done():
-				fmt.Println("file close!")
-				file.Close()
-				return
-			}
+func NewRnReplace(fP filePath.FilePath) (Replace, error) {
+	path, same := fP.Format(cfg.GetBaseConfig().GetOutPath())
+	if same {
+		file, err := os.OpenFile(path, os.O_RDWR, 0x666)
+		if err != nil {
+			return nil, err
 		}
-	}()
-	return &rnReplace{
-		path:      path,
-		file:      file,
-		cancelFun: cancelFun,
-		ctx:       ctx,
-	}, nil
+		outFile, err := os.OpenFile(path, os.O_CREATE|os.O_RDWR, 0x666)
+		if err != nil {
+			file.Close()
+			return nil, err
+		}
+		ctx, cancelFun := context.WithTimeout(context.Background(), time.Duration(time.Second*5))
+		go func() {
+			for {
+				select {
+				case <-ctx.Done():
+					fmt.Println("file close:", path)
+					file.Close()
+					outFile.Close()
+					return
+				}
+			}
+		}()
+
+		return &rnReplace{
+			path:         path,
+			file:         file,
+			outFile:      outFile,
+			cancelFun:    cancelFun,
+			ctx:          ctx,
+			inAndOutSame: true,
+		}, nil
+	} else {
+		file, err := os.OpenFile(fP.GetFilePath(), os.O_RDWR, 0x666)
+		if err != nil {
+			return nil, err
+		}
+		os.MkdirAll(fP.GetFileDir(), 0x666)
+		outFile, err := os.OpenFile(path, os.O_CREATE|os.O_RDWR, 0x666)
+		if err != nil {
+			file.Close()
+			return nil, err
+		}
+		ctx, cancelFun := context.WithTimeout(context.Background(), time.Duration(time.Second*5))
+		go func() {
+			for {
+				select {
+				case <-ctx.Done():
+					fmt.Println("file close:", fP.GetFilePath())
+					file.Close()
+					fmt.Println("file close:", path)
+					outFile.Close()
+					return
+				}
+			}
+		}()
+		return &rnReplace{
+			path:         path,
+			file:         file,
+			outFile:      outFile,
+			cancelFun:    cancelFun,
+			ctx:          ctx,
+			inAndOutSame: false,
+		}, nil
+	}
 }
