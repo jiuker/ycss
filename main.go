@@ -14,7 +14,7 @@ import (
 func main() {
 	// parse base config file path
 	var baseConfigPath string
-	flag.StringVar(&baseConfigPath, "base", "./res/config", "set base config file path")
+	flag.StringVar(&baseConfigPath, "configDir", "./res/config", "set base config file path")
 	cfg.SetBasePath(baseConfigPath)
 	handle.StartHandle()
 	exit := make(chan os.Signal)

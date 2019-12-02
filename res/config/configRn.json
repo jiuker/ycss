@@ -12,5 +12,10 @@
   "keyNeedZoom": [
     "width",
     "height"
-  ]
+  ],
+  "static": {
+    "red": "#ff0000",
+    "red-1": "#ff1100",
+    "height": 12
+  }
 }

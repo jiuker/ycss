@@ -53,6 +53,12 @@ func (v *rnReplace) GetRegexpCss(cls []string, common *sync.Map, single css.Css)
 					for i := 1; i < len(matchVal[0]); i++ {
 						// replace data
 						val = strings.ReplaceAll(val, fmt.Sprintf("$%v", i), matchVal[0][i])
+						if !strings.Contains(val, "$") {
+							if viper.GetBool("debug") {
+								fmt.Println(val, matchVal[0], i)
+							}
+							break
+						}
 					}
 					if !strings.Contains(val, "$") {
 						for _, _unit := range single.GetAllData().Range(0) {
@@ -108,7 +114,7 @@ func (v *rnReplace) Zoom(css *string, unit string, needZoomUint string, keyNeedZ
 		fmt.Println("zoom ing...", str)
 	}
 	// rcss dont need outline{}
-	str = str[1:len(str)-1] + ","
+	str = str[1 : len(str)-1]
 	return &str
 }
 func walkToSet(data interface{}, key string, keyNeedZoom []string, zoom float64) interface{} {

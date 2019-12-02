@@ -120,10 +120,10 @@ func (r *cssRegexp) Parse() error {
 				switch c.GetFileType() {
 				case RNCSS:
 					// rn
-					r.single.Set(css.NewRnCssUint(regexp.MustCompile(val), selection.Text()))
+					r.single.Set(css.NewRnCssUint(regexp.MustCompile(val), selection.Text(), _cfg.GetStatic()))
 				case VueCss:
 					// vue
-					r.single.Set(css.NewVueCssUint(regexp.MustCompile(val), selection.Text()))
+					r.single.Set(css.NewVueCssUint(regexp.MustCompile(val), selection.Text(), _cfg.GetStatic()))
 				}
 			}
 		})

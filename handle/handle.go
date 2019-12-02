@@ -58,7 +58,9 @@ func StartHandle() {
 						fmt.Println("old:", *old)
 					}
 					if replace.IsSame(rcss, old) {
-						// the same,do nothing
+						if viper.GetBool("debug") {
+							fmt.Println("just is same,do nothing!")
+						}
 						return
 					}
 					newPos := pla.Replace(old, rcss, pos)

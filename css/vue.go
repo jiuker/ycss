@@ -1,8 +1,10 @@
 package css
 
 import (
+	"fmt"
 	"regexp"
 	"strings"
+	"sync"
 
 	"github.com/gogf/gf/container/garray"
 )
@@ -25,8 +27,16 @@ func NewVueCss() Css {
 		data: garray.NewArray(),
 	}
 }
-func NewVueCssUint(reg *regexp.Regexp, cssVal string) Uint {
+func NewVueCssUint(reg *regexp.Regexp, cssVal string, staticMap *sync.Map) Uint {
 	cssVal = strings.TrimSpace(cssVal)
+	// replace static value @key
+	staticMap.Range(func(key, value interface{}) bool {
+		cssVal = strings.Replace(cssVal, "@"+key.(string), fmt.Sprintf("%v", value), -1)
+		if strings.Contains(cssVal, "@") {
+			return true
+		}
+		return false
+	})
 	return &VueCssUint{
 		val: cssVal,
 		reg: reg,

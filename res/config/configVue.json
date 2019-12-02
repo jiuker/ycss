@@ -9,5 +9,10 @@
   "reg": ["class=\"([^\"]+)\""],
   "watchDir": ["./res/sample/vue"],
   "oldCssReg": "/\\* Automatic generation Start \\*/([^/]+)/\\*",
-  "keyNeedZoom": []
+  "keyNeedZoom": [],
+  "static": {
+    "red": "#ff0000",
+    "red-1": "#ff1100",
+    "height": 12
+  }
 }

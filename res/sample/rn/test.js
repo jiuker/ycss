@@ -21,7 +21,7 @@ export default class App extends React.Component {
     render() {
         // 注意render一个组件
         return (
-            <div styles={GetStyle("w-110 h-25 tX-12")}>123</div>
+            <div styles={GetStyle("w-60-h-25 tX-14 c-r")}>123</div>
         )
     }
 }
@@ -30,14 +30,6 @@ function GetStyle(className) {
 }
 
 const styles = StyleSheet.create({
-    /* Automatic generation Start */
-    "container": {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    /* Automatic generation End */
     welcome: {
         fontSize: 20,
         textAlign: 'center',
@@ -48,4 +40,26 @@ const styles = StyleSheet.create({
         color: '#333333',
         marginBottom: 5,
     },
+    /* Automatic generation Start */
+
+	"c-r": {
+		"color": "#ff0000"
+	},
+	"tX-14": {
+		"transform": [
+			{
+				"translateX": 14
+			},
+			{
+				"translateY": 14
+			}
+		],
+		"width": 19.599999999999998
+	},
+	"w-60-h-25": {
+		"height": 35,
+		"width": 84
+	}
+
+/* Automatic generation End */
 });

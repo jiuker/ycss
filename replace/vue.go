@@ -102,6 +102,12 @@ func (v *vueReplace) GetRegexpCss(cls []string, common *sync.Map, single css.Css
 					for i := 1; i < len(matchVal[0]); i++ {
 						// replace data
 						val = strings.ReplaceAll(val, fmt.Sprintf("$%v", i), matchVal[0][i])
+						if !strings.Contains(val, "$") {
+							if viper.GetBool("debug") {
+								fmt.Println(val, matchVal[0], i)
+							}
+							break
+						}
 					}
 					if !strings.Contains(val, "$") {
 						for _, _unit := range single.GetAllData().Range(0) {

@@ -28,6 +28,7 @@ type Config interface {
 	GetOldCssReg() *regexp.Regexp
 	GetWatchDir() []string
 	GetKeyNeedZoom() []string
+	GetStatic() *sync.Map
 }
 type cfg struct {
 	// should like "px","rem"
@@ -44,47 +45,76 @@ type cfg struct {
 	IsDebug      bool
 	OldCssReg    *regexp.Regexp
 	KeyNeedZoom  []string
+	StaticMap    *sync.Map
+}
+
+func (c *cfg) GetStatic() *sync.Map {
+	c.rwLocker.RLock()
+	defer c.rwLocker.RUnlock()
+	return c.StaticMap
 }
 
 func (c *cfg) GetKeyNeedZoom() []string {
+	c.rwLocker.RLock()
+	defer c.rwLocker.RUnlock()
 	return c.KeyNeedZoom
 }
 
 func (c *cfg) GetOldCssReg() *regexp.Regexp {
+	c.rwLocker.RLock()
+	defer c.rwLocker.RUnlock()
 	return c.OldCssReg
 }
 
 func (c *cfg) GetNeedZoomUnit() string {
+	c.rwLocker.RLock()
+	defer c.rwLocker.RUnlock()
 	return c.NeedZoomUnit
 }
 
 func (c *cfg) Debug() bool {
+	c.rwLocker.RLock()
+	defer c.rwLocker.RUnlock()
 	return c.IsDebug
 }
 func (c *cfg) GetWatchDir() []string {
+	c.rwLocker.RLock()
+	defer c.rwLocker.RUnlock()
 	return c.WatchDir
 }
 
 func (c *cfg) GetReg() []*regexp.Regexp {
+	c.rwLocker.RLock()
+	defer c.rwLocker.RUnlock()
 	return c.Reg
 }
 
 func (c *cfg) GetZoom() float64 {
+	c.rwLocker.RLock()
+	defer c.rwLocker.RUnlock()
 	return c.Zoom
 }
 
 func (c *cfg) GetCommonRegexpPath() []string {
+	c.rwLocker.RLock()
+	defer c.rwLocker.RUnlock()
 	return c.CommonPath
 }
 
 func (c *cfg) GetSinglePath() []string {
+	c.rwLocker.RLock()
+	defer c.rwLocker.RUnlock()
 	return c.SinglePath
 }
 
 func (c *cfg) GetOutUnit() string {
+	c.rwLocker.RLock()
+	defer c.rwLocker.RUnlock()
 	return c.OutUnit
 }
 func (c *cfg) GetFileType() FileType {
+	c.rwLocker.RLock()
+	defer c.rwLocker.RUnlock()
 	return c.CssType
 }
 
@@ -142,6 +172,10 @@ func refreshCfg() {
 	_cfg.IsDebug = viper.GetBool("debug")
 	_cfg.OldCssReg = regexp.MustCompile(fmt.Sprintf(`%s`, viper.GetString("oldCssReg")))
 	_cfg.KeyNeedZoom = viper.GetStringSlice("keyNeedZoom")
+	_cfg.StaticMap = &sync.Map{}
+	for k, v := range viper.GetStringMap("static") {
+		_cfg.StaticMap.Store(k, v)
+	}
 	// clear it regexp
 	_cfg.Reg = []*regexp.Regexp{}
 	for _, v := range viper.GetStringSlice("reg") {
