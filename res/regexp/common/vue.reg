@@ -134,6 +134,12 @@
 <css key="^d-b$">
   d-b
 </css>
+<css key="^d-ib$">
+  d-ib
+</css>
+<css key="^d-i$">
+  d-i
+</css>
 
 <css key="^b-(\d{1,3})$">
    b-$1
