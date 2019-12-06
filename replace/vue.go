@@ -182,16 +182,16 @@ func (v *vueReplace) FindClass(reg []*regexp.Regexp) []string {
 func NewVueReplace(fP filePath.FilePath) (Replace, error) {
 	path, same := fP.Format(cfg.GetBaseConfig().GetOutPath())
 	if same {
-		file, err := os.OpenFile(path, os.O_RDWR, 0x666)
+		file, err := os.OpenFile(path, os.O_RDWR, 0x644)
 		if err != nil {
 			return nil, err
 		}
-		outFile, err := os.OpenFile(path, os.O_CREATE|os.O_RDWR, 0x666)
+		outFile, err := os.OpenFile(path, os.O_CREATE|os.O_RDWR, 0x644)
 		if err != nil {
 			file.Close()
 			return nil, err
 		}
-		ctx, cancelFun := context.WithTimeout(context.Background(), time.Duration(time.Second*5))
+		ctx, cancelFun := context.WithTimeout(context.Background(), time.Duration(time.Second*20))
 		go func() {
 			for {
 				select {
@@ -211,12 +211,12 @@ func NewVueReplace(fP filePath.FilePath) (Replace, error) {
 			inAndOutSame: true,
 		}, nil
 	} else {
-		file, err := os.OpenFile(fP.GetFilePath(), os.O_RDWR, 0x666)
+		file, err := os.OpenFile(fP.GetFilePath(), os.O_RDWR, 0x644)
 		if err != nil {
 			return nil, err
 		}
 		os.MkdirAll(fP.GetFileDir(), 0x666)
-		outFile, err := os.OpenFile(path, os.O_CREATE|os.O_RDWR, 0x666)
+		outFile, err := os.OpenFile(path, os.O_CREATE|os.O_RDWR, 0x644)
 		if err != nil {
 			file.Close()
 			return nil, err

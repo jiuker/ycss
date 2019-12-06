@@ -198,10 +198,6 @@ func (v *rnReplace) Save(newPos *string, oldPos *string) error {
 	if err != nil {
 		return err
 	}
-	err = v.outFile.Sync()
-	if err != nil {
-		return err
-	}
 	return nil
 }
 
@@ -213,11 +209,11 @@ func (v *rnReplace) Done() {
 func NewRnReplace(fP filePath.FilePath) (Replace, error) {
 	path, same := fP.Format(cfg.GetBaseConfig().GetOutPath())
 	if same {
-		file, err := os.OpenFile(path, os.O_RDWR, 0x666)
+		file, err := os.OpenFile(path, os.O_RDWR, 0x644)
 		if err != nil {
 			return nil, err
 		}
-		outFile, err := os.OpenFile(path, os.O_CREATE|os.O_RDWR, 0x666)
+		outFile, err := os.OpenFile(path, os.O_CREATE|os.O_RDWR, 0x644)
 		if err != nil {
 			file.Close()
 			return nil, err
@@ -244,12 +240,12 @@ func NewRnReplace(fP filePath.FilePath) (Replace, error) {
 			inAndOutSame: true,
 		}, nil
 	} else {
-		file, err := os.OpenFile(fP.GetFilePath(), os.O_RDWR, 0x666)
+		file, err := os.OpenFile(fP.GetFilePath(), os.O_RDWR, 0x644)
 		if err != nil {
 			return nil, err
 		}
 		os.MkdirAll(fP.GetFileDir(), 0x666)
-		outFile, err := os.OpenFile(path, os.O_CREATE|os.O_RDWR, 0x666)
+		outFile, err := os.OpenFile(path, os.O_CREATE|os.O_RDWR, 0x644)
 		if err != nil {
 			file.Close()
 			return nil, err
