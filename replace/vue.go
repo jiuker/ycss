@@ -215,7 +215,7 @@ func NewVueReplace(fP filePath.FilePath) (Replace, error) {
 		if err != nil {
 			return nil, err
 		}
-		os.MkdirAll(fP.GetFileDir(), 0x666)
+		os.MkdirAll(fP.GetFileDir(), 0x644)
 		outFile, err := os.OpenFile(path, os.O_CREATE|os.O_RDWR, 0x644)
 		if err != nil {
 			file.Close()
