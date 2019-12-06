@@ -208,7 +208,7 @@ func NewVueReplace(fP filePath.FilePath) (Replace, error) {
 			outFile:      outFile,
 			cancelFun:    cancelFun,
 			ctx:          ctx,
-			inAndOutSame: false,
+			inAndOutSame: true,
 		}, nil
 	} else {
 		file, err := os.OpenFile(fP.GetFilePath(), os.O_RDWR, 0x666)
