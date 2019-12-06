@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/jiuker/ycss/filePath"
 	"github.com/jiuker/ycss/replace"
+	"time"
 
 	"github.com/spf13/viper"
 
@@ -15,6 +16,7 @@ func StartHandle() {
 		for {
 			select {
 			case path := <-cfg.ChangeFilePath:
+				time.Sleep(time.Second * 1)
 				if viper.GetBool("debug") {
 					fmt.Println("the url will handle", path)
 				}
