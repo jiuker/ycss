@@ -48,6 +48,10 @@ func StartHandle() {
 					if viper.GetBool("debug") {
 						fmt.Println("this handle print class is ", cls)
 					}
+					// cls is nil,may error
+					if len(cls) == 0 {
+						return
+					}
 					rcss := pla.GetRegexpCss(cls, cfg.GetRegexp().GetCommonReg(), cfg.GetRegexp().GetSingle())
 					if viper.GetBool("debug") {
 						fmt.Println("zoom befer:", *rcss)
