@@ -16,6 +16,7 @@ func StartHandle() {
 		for {
 			select {
 			case path := <-cfg.ChangeFilePath:
+				// too fast will error?
 				time.Sleep(time.Second * 1)
 				if viper.GetBool("debug") {
 					fmt.Println("the url will handle", path)
