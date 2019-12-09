@@ -57,6 +57,9 @@
 <css key="^ta-c$">
   text-align:center;
 </css>
+<css key="^ta-e$">
+    text-align:end;
+</css>
 <css key="^ta-l$">
   text-align:left;
 </css>
@@ -183,6 +186,9 @@
 <css key="^jc-c$">
    justify-content:center;
 </css>
+<css key="^jc-fe$">
+   justify-content:flex-end;
+</css>
 <css key="^ai-c$">
    align-items:center;
 </css>
@@ -197,6 +203,10 @@
 </css>
 <css key="^o-a$">
    overflow:auto;
+</css>
+
+<css key="^c-p$">
+   cursor:pointer;
 </css>
 
 

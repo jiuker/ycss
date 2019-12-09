@@ -3,11 +3,11 @@
     "type": "vue",
     "common": ["./res/regexp/common/vue.reg"],
     "single": ["./res/regexp/single/vue.reg"],
-    "outUnit": "upx",
-    "zoom": 2,
+    "outUnit": "px",
+    "zoom": 1,
     "needZoomUnit": "px|rem|upx",
     "reg": ["class=\"([^\"]+)\""],
-    "watchDir": ["./res/sample/vue"],
+    "watchDir": ["/home/liguohiz/goworkspace/src/cpmsum/res/html"],
     "oldCssReg": "/\\* Automatic generation Start \\*/([^/]+)/\\*",
     "keyNeedZoom": [],
     "static": {
@@ -15,5 +15,5 @@
         "red-1": "#ff1100",
         "height": 12
     },
-    "outPath": "@FILEDIR/test.css"
+    "outPath": "@FILEDIR/@FILENAME.@FILETYPE"
 }

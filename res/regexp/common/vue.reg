@@ -58,6 +58,9 @@
 <css key="^ta-c$">
    ta-c
 </css>
+<css key="^ta-e$">
+   ta-e
+</css>
 <css key="^ta-l$">
    ta-l
 </css>
@@ -184,6 +187,9 @@
 <css key="^ai-c$">
   ai-c
 </css>
+<css key="^jc-fe$">
+  jc-fe
+</css>
 <css key="^fw-nw$">
     fw-nw
 </css>
@@ -195,4 +201,8 @@
 </css>
 <css key="^o-a$">
     o-a
+</css>
+
+<css key="^c-p$">
+   c-p
 </css>
