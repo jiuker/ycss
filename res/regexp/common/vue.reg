@@ -55,6 +55,9 @@
 <css key="^lh-([0-9]{1,3})$">
   lh-$1
 </css>
+<css key="^ta-s$">
+  ta-s
+</css>
 <css key="^ta-c$">
    ta-c
 </css>
