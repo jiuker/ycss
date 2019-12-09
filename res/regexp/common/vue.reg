@@ -207,6 +207,9 @@
    c-p
 </css>
 
-<css key="^o-h-(\d{1,2})">
+<css key="^o-h-(\d{1,2})$">
     o-h-$1
+</css>
+<css key="^td-n$">
+   td-n
 </css>
