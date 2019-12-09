@@ -209,5 +209,11 @@
    cursor:pointer;
 </css>
 
+<css key="^o-h-(\d{1,2})">
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $1;
+    overflow: hidden;
+</css>
 
 
