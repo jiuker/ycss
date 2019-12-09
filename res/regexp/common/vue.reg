@@ -77,32 +77,32 @@
 <css key="^m-(\d{2,2})(\d{2,2})$">
    m-$1$2
 </css>
-<css key="^ml-(\d{2,2})$">
+<css key="^ml-(\d{1,2})$">
    ml-$1
 </css>
-<css key="^mr-(\d{2,2})$">
+<css key="^mr-(\d{1,2})$">
    mr-$1
 </css>
-<css key="^mt-(\d{2,2})$">
+<css key="^mt-(\d{1,2})$">
    mt-$1
 </css>
-<css key="^mb-(\d{2,2})$">
+<css key="^mb-(\d{1,2})$">
    mb-$1
 </css>
 
 <css key="^p-(\d{2,2})(\d{2,2})$">
    p-$1$2
 </css>
-<css key="^pl-(\d{2,2})$">
+<css key="^pl-(\d{1,2})$">
    pl-$1
 </css>
-<css key="^pr-(\d{2,2})$">
+<css key="^pr-(\d{1,2})$">
    pr-$1
 </css>
-<css key="^pt-(\d{2,2})$">
+<css key="^pt-(\d{1,2})$">
    pt-$1
 </css>
-<css key="^pb-(\d{2,2})$">
+<css key="^pb-(\d{1,2})$">
    pb-$1
 </css>
 
