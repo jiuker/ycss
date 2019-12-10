@@ -80,16 +80,16 @@
 <css key="^m-(\d{2,2})(\d{2,2})$">
    m-$1$2
 </css>
-<css key="^ml-(\d{1,2})$">
+<css key="^ml-([-|0-9]{1,4})$">
    ml-$1
 </css>
-<css key="^mr-(\d{1,2})$">
+<css key="^mr-([-|0-9]{1,4})$">
    mr-$1
 </css>
-<css key="^mt-(\d{1,2})$">
+<css key="^mt-([-|0-9]{1,4})$">
    mt-$1
 </css>
-<css key="^mb-(\d{1,2})$">
+<css key="^mb-([-|0-9]{1,4})$">
    mb-$1
 </css>
 

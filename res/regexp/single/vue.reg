@@ -79,16 +79,16 @@
 <css key="^m-(\d{2,2})(\d{2,2})$">
    margin:$1px $2px;
 </css>
-<css key="^ml-(\d{1,2})$">
+<css key="^ml-([-|0-9]{1,4})$">
    margin-left:$1px;
 </css>
-<css key="^mr-(\d{1,2})$">
+<css key="^mr-([-|0-9]{1,4})$">
    margin-right:$1px;
 </css>
-<css key="^mt-(\d{1,2})$">
+<css key="^mt-([-|0-9]{1,4})$">
    margin-top:$1px;
 </css>
-<css key="^mb-(\d{1,2})$">
+<css key="^mb-([-|0-9]{1,4})$">
    margin-bottom:$1px;
 </css>
 
