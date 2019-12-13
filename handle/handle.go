@@ -16,14 +16,15 @@ func StartHandle() {
 		for {
 			select {
 			case path := <-cfg.ChangeFilePath:
-				// too fast will error?
-				time.Sleep(time.Millisecond * 300)
-				if viper.GetBool("debug") {
-					fmt.Println("the url will handle", path)
-				}
-				var pla replace.Replace
-				var err error
-				func() {
+				go func() {
+					// too fast will error?
+					time.Sleep(time.Millisecond * 300)
+					if viper.GetBool("debug") {
+						fmt.Println("the url will handle", path)
+					}
+					var pla replace.Replace
+					var err error
+
 					f := filePath.NewFilePath(path)
 					switch cfg.GetBaseConfig().GetFileType() {
 					case cfg.VueCss:
