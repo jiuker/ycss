@@ -108,6 +108,18 @@
 <css key="^pb-(\d{1,2})$">
    pb-$1
 </css>
+<css key="^pl--(\d{1,2})$">
+   pl--$1
+</css>
+<css key="^pr--(\d{1,2})$">
+   pr--$1
+</css>
+<css key="^pt--(\d{1,2})$">
+   pt--$1
+</css>
+<css key="^pb--(\d{1,2})$">
+   pb--$1
+</css>
 
 <css key="^h-(\d{1,3})$">
   h-$1
