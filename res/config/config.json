@@ -4,10 +4,10 @@
     "common": ["./res/regexp/common/vue.reg"],
     "single": ["./res/regexp/single/vue.reg"],
     "outUnit": "px",
-    "zoom": 2,
-    "needZoomUnit": "[px]|[rem]|[upx]",
+    "zoom": 1,
+    "needZoomUnit": "px|rem|upx",
     "reg": ["class=\"([^\"]+)\""],
-    "watchDir": ["E:\\goworkspace\\src\\dmallRedisSync\\center\\res\\vue-element-admin\\src\\views\\sync"],
+    "watchDir": [],
     "oldCssReg": "/\\* Automatic generation Start \\*/([^/]+)/\\*",
     "keyNeedZoom": [],
     "static": {

@@ -79,10 +79,11 @@ func (v *vueReplace) GetOldCss(reg *regexp.Regexp) (*string, *string, error) {
 }
 
 func (v *vueReplace) Zoom(in *string, unit string, needZoomUnit string, needZoomKey []string, zoom float64) *string {
-	reg := regexp.MustCompile(fmt.Sprintf(`[0-9|.]{1,10}[ |	]{0,3}[%s]{1,5}`, needZoomUnit))
+	reg := regexp.MustCompile(fmt.Sprintf(`[0-9|\.]{1,10}[ |	]{0,3}(%s){1,5}`, needZoomUnit))
 	dataReg := regexp.MustCompile(`\d{1,5}|\d{1,5}\.\d{1,5}`)
 	unitReg := regexp.MustCompile(fmt.Sprintf(`%s`, needZoomUnit))
 	_in := reg.ReplaceAllStringFunc(*in, func(s string) string {
+		fmt.Println("get s is ", s)
 		s = dataReg.ReplaceAllStringFunc(s, func(s1 string) string {
 			sFloat, err := strconv.ParseFloat(s1, 64)
 			if err != nil {

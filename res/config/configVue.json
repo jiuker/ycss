@@ -5,7 +5,7 @@
   "single": ["./res/regexp/single/vue.reg"],
   "outUnit": "px",
   "zoom": 1,
-  "needZoomUnit": "[px]|[rem]|[upx]",
+  "needZoomUnit": "px|rem|upx",
   "reg": ["class=\"([^\"]+)\""],
   "watchDir": ["./res/sample/vue"],
   "oldCssReg": "/\\* Automatic generation Start \\*/([^/]+)/\\*",
