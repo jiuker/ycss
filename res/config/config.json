@@ -1,13 +1,13 @@
 {
-    "debug": false,
+    "debug": true,
     "type": "vue",
     "common": ["./res/regexp/common/vue.reg"],
     "single": ["./res/regexp/single/vue.reg"],
     "outUnit": "px",
-    "zoom": 1,
-    "needZoomUnit": "px|rem|upx",
+    "zoom": 2,
+    "needZoomUnit": "[px]|[rem]|[upx]",
     "reg": ["class=\"([^\"]+)\""],
-    "watchDir": ["/home/liguohiz/goworkspace/src/cpmsum/res/html"],
+    "watchDir": ["E:\\goworkspace\\src\\dmallRedisSync\\center\\res\\vue-element-admin\\src\\views\\sync"],
     "oldCssReg": "/\\* Automatic generation Start \\*/([^/]+)/\\*",
     "keyNeedZoom": [],
     "static": {

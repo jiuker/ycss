@@ -18,6 +18,6 @@ func main() {
 	cfg.SetBasePath(baseConfigPath)
 	handle.StartHandle()
 	exit := make(chan os.Signal)
-	signal.Notify(exit, syscall.SIGSTOP)
+	signal.Notify(exit, syscall.SIGKILL)
 	<-exit
 }
