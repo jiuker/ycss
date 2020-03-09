@@ -7,7 +7,7 @@
     "zoom": 1,
     "needZoomUnit": "px|rem|upx",
     "reg": ["class=\"([^\"]+)\""],
-    "watchDir": [],
+    "watchDir": ["E:\\goworkspace\\src\\dmallRedisSync\\center\\res\\vue-element-admin\\src\\views\\sync"],
     "oldCssReg": "/\\* Automatic generation Start \\*/([^/]+)/\\*",
     "keyNeedZoom": [],
     "static": {

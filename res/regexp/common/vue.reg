@@ -124,8 +124,14 @@
 <css key="^maxh-(\d{1,3})$">
   maxh-$1
 </css>
+<css key="^maxh(\d{1,3})$">
+  maxh$1
+</css>
 <css key="^maxw-(\d{1,3})$">
    maxw-$1
+</css>
+<css key="^maxw(\d{1,3})$">
+   maxw$1
 </css>
 <css key="^minh-(\d{1,3})$">
    minh-$1
