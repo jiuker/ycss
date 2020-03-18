@@ -121,6 +121,13 @@
 <css key="^w(\d{1,3})$">
   w$1
 </css>
+<css key="^h-(\d{1,3})-vh$">
+   h-$1-vh
+</css>
+<css key="^w-(\d{1,3})-vw$">
+    w-$1-vw
+</css>
+
 <css key="^maxh-(\d{1,3})$">
   maxh-$1
 </css>

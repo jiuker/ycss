@@ -121,6 +121,12 @@
 <css key="^w(\d{1,3})$">
    width:$1%;
 </css>
+<css key="^h-(\d{1,3})-vh$">
+   height:$1vh;
+</css>
+<css key="^w-(\d{1,3})-vw$">
+   width:$1vw;
+</css>
 
 <css key="^maxh-(\d{1,3})$">
    max-height:$1px;
