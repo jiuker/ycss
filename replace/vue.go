@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/jiuker/ycss/cfg"
 	"github.com/jiuker/ycss/filePath"
+	"github.com/jiuker/ycss/log"
 	"io/ioutil"
 	"os"
 	"regexp"
@@ -13,8 +14,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	"github.com/spf13/viper"
 
 	"github.com/jiuker/ycss/watch"
 
@@ -43,9 +42,7 @@ func (v *vueReplace) Save(newPos, oldPos *string) error {
 	watch.NeedIgnore(v.path)
 	bodyCopy := v.GetOutFileBody()
 	newWrite := strings.Replace(bodyCopy, *oldPos, *newPos, 2)
-	if viper.GetBool("debug") {
-		fmt.Println("will insert ", newWrite)
-	}
+	log.Log("will insert ", newWrite)
 	err := v.outFile.Truncate(0)
 	if err != nil {
 		return err
@@ -62,9 +59,7 @@ func (v *vueReplace) Save(newPos, oldPos *string) error {
 }
 
 func (v *vueReplace) GetOldCss(reg *regexp.Regexp) (*string, *string, error) {
-	if viper.GetBool("debug") {
-		fmt.Println("outFileBody--------------", v.GetOutFileBody())
-	}
+	log.Log("outFileBody--------------", v.GetOutFileBody())
 	if !v.inAndOutSame {
 		reg = regexp.MustCompile(strings.ReplaceAll(reg.String(), "Start", fmt.Sprintf(`Start\(%s\)`, v.path)))
 	}
@@ -115,9 +110,7 @@ func (v *vueReplace) GetRegexpCss(cls []string, common *sync.Map, single css.Css
 						// replace data
 						val = strings.ReplaceAll(val, fmt.Sprintf("$%v", i), matchVal[0][i])
 						if !strings.Contains(val, "$") {
-							if viper.GetBool("debug") {
-								fmt.Println(val, matchVal[0], i)
-							}
+							log.Log(val, matchVal[0], i)
 							break
 						}
 					}

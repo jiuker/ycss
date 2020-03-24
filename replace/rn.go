@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/jiuker/ycss/cfg"
 	"github.com/jiuker/ycss/filePath"
+	"github.com/jiuker/ycss/log"
 	"io/ioutil"
 	"os"
 	"regexp"
@@ -15,8 +16,6 @@ import (
 	"time"
 
 	"github.com/jiuker/ycss/watch"
-
-	"github.com/spf13/viper"
 
 	"github.com/jiuker/ycss/css"
 )
@@ -70,9 +69,7 @@ func (v *rnReplace) GetRegexpCss(cls []string, common *sync.Map, single css.Css)
 						// replace data
 						val = strings.ReplaceAll(val, fmt.Sprintf("$%v", i), matchVal[0][i])
 						if !strings.Contains(val, "$") {
-							if viper.GetBool("debug") {
-								fmt.Println(val, matchVal[0], i)
-							}
+							log.Log(val, matchVal[0], i)
 							break
 						}
 					}
@@ -126,9 +123,7 @@ func (v *rnReplace) Zoom(css *string, unit string, needZoomUint string, keyNeedZ
 		return css
 	}
 	str := string(dataByte)
-	if viper.GetBool("debug") {
-		fmt.Println("zoom ing...", str)
-	}
+	log.Log("zoom ing...", str)
 	// rcss dont need outline{}
 	str = str[1 : len(str)-1]
 	return &str
@@ -159,9 +154,7 @@ func walkToSet(data interface{}, key string, keyNeedZoom []string, zoom float64)
 	return data
 }
 func (v *rnReplace) GetOldCss(reg *regexp.Regexp) (*string, *string, error) {
-	if viper.GetBool("debug") {
-		fmt.Println("outFileBody--------------", v.GetOutFileBody())
-	}
+	log.Log("outFileBody--------------", v.GetOutFileBody())
 	if !v.inAndOutSame {
 		reg = regexp.MustCompile(strings.ReplaceAll(reg.String(), "Start", fmt.Sprintf(`Start\(%s\)`, v.path)))
 	}
@@ -187,9 +180,7 @@ func (v *rnReplace) Save(newPos *string, oldPos *string) error {
 	watch.NeedIgnore(v.path)
 	bodyCopy := v.GetOutFileBody()
 	newWrite := strings.Replace(bodyCopy, *oldPos, *newPos, 2)
-	if viper.GetBool("debug") {
-		fmt.Println("will insert ", newWrite)
-	}
+	log.Log("will insert ", newWrite)
 	err := v.outFile.Truncate(0)
 	if err != nil {
 		return err
